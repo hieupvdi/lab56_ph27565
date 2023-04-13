@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DuAn.Models.Role>
+
+@{
+    ViewData["Title"] = "ShowAllRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Sách Chức Vụ</h2>
+
+<p>
+    <a asp-action="CreateRole">
+        <button type="button" class="btn btn-primary">
+        <i class="bi bi-pencil-square"> Thêm</i>
+        </button></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+          @*  <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+          @*  <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                   @if (item.Status == 0) {
+                        <span>Đang Làm Việc</span>
+                    } else if(item.Status == 1){
+                        <span>Nghỉ việc</span>
+                    }
+                    else
+                    {
+                        <span>khác</span>
+                    }
+            </td>
+            <td>
+              
+
+                @Html.ActionLink("Sửa", "EditRole", new {  id=item.Id  }) |
+                @Html.ActionLink("Chi Tiết", "DetailRoles", new { id=item.Id  }) |
+                @Html.ActionLink("Xóa", "DeleteRole", new { id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

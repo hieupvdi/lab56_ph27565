@@ -1,0 +1,106 @@
+﻿@model IEnumerable<DuAn.Models.User>
+
+@{
+    ViewData["Title"] = "ShowAllUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh Sách Tài Khoản</h1>
+
+<p>
+    <a asp-action="CreateUser">
+        <button type="button" class="btn btn-primary">
+        <i class="bi bi-pencil-square"> Thêm</i>
+        </button></a>
+</p>
+
+
+<table class="table" >
+    <thead>
+        <tr>
+        @*    <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Gmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinkAnh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+         @*   <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Gmail)
+            </td>
+            <td>
+                <img src="@item.LinkAnh" style="width: 100px; height: 100px;"/>
+               @* @Html.DisplayFor(modelItem => item.LinkAnh)*@
+               
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+              @*  hai cách lâý Role  name cho bảng user*@
+                    @{
+                        DuAn.Models.ShopDbContext db = new DuAn.Models.ShopDbContext();
+                        dynamic cv = db.Roles.Find(item.RoleId);
+
+
+                        if(cv != null)
+                        {
+                            <spam>@cv.RoleName</spam>
+                        }
+                    }
+                    @*  cách 2 bị lỗi*@
+                   @*  @if(item.RoleId != null)
+                     {
+                                <spam>@item.Role.RoleName</spam>
+                     }*@
+              
+
+               @* @Html.DisplayFor(modelItem => item.RoleId)*@
+            </td>
+            <td>
+             
+                    @if (item.Status == 0)
+                    {
+                        <spam>Online</spam>
+                    }
+                    else
+                    {
+                        <spam>Offline</spam>
+                    }
+                    @*   @Html.DisplayFor(modelItem => item.Status)*@
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "EditUser", new {  id=item.Id  }) |
+                @Html.ActionLink("Chi Tiết", "DetailUsers", new { id=item.Id  }) |
+                @Html.ActionLink("Xóa", "DeleteUser", new { id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

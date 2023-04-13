@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="sp">
+        <div class="row">
+            <h1>Top giày bán chạy</h1>
+            @foreach (var item in Model)
+            {
+                
+                <div class="col-md-3 col-xs-6">
+                <img src="@item.LinkAnh" alt="" style="width: 100%">
+                <p class="tensp">@item.Name</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="giaspkm">@item.Price đ</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="giasp">@item.Price đ</p>
+                    </div>
+                </div>
+                <div class="b-mua">
+                    <a href="@Url.Action("DetailProducts","Product",new { id=item.Id })">
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="bi bi-bag-check"></i>
+                          mua
+                        </button>
+                    </a>
+
+                </div>
+            </div> 
+            }
+
+        </div>
+    </div>
+    <div class="sp1">
+        <h2>Giới Thiệu Cửa Hàng</h2>
+        <div class="row">
+
+            <div class="col-md-6 col-xs-6">
+                <span>Shop Giày Online Hiếu Sneaker  với phương châm "Đồng hành cùng phong cách thời trang của bạn" 
+                            sẽ là nơi mua sắm an toàn và uy tín, bởi chúng tôi luôn đề cao tiêu chí mang đến cho quý khách
+                            những sản phẩm chất lượng nhất với giá cả luôn phải chăng 
+                            </span>
+
+                <!-- <p>Địa chỉ: Ngõ 71,Phường Phương Canh,Quận Nam Từ Liêm, Hà Nội </p>
+                            <p>SĐT : 037019932</p> -->
+                <div class="butoon_lh">
+                    <a href="./Gioithieu.html">
+                        <button type="button" class="btn btn-primary">Liên Hệ</button>
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-xs-6">
+
+                <a href="">
+               
+                   <img src="~/images/quangiay.jpg" style="width: 100%"/>
+                </a>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    
+    <div class="sp">
+        <div class="row">
+            <h2>Giầy Khuyến Mãi </h2>
+           
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 col-xs-6">
+                <img src="@item.LinkAnh" alt="" style="width: 100%">
+                <p class="tensp">@item.Name</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="giaspkm">@item.Price đ</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="giasp">@item.Price đ</p>
+                    </div>
+                </div>
+                <div class="b-mua">
+                     <a href="@Url.Action("DetailProducts","Product",new { id=item.Id })">
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="bi bi-bag-check"></i>
+                          mua
+                        </button>
+                    </a>
+
+                </div>
+            </div> 
+            }
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+

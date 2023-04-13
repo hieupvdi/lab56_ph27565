@@ -1,0 +1,90 @@
+﻿@model DuAn.Models.User
+
+@{
+    ViewData["Title"] = "CreateUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DuAn.Models.ShopDbContext db = new DuAn.Models.ShopDbContext();
+}
+
+<h1>CreateUser</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="d-flex justify-content-center">
+            <div class=" col-md-10">
+        <form asp-action="CreateUser" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  @*          <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Gmail" class="control-label"></label>
+                <input asp-for="Gmail" class="form-control" />
+                <span asp-validation-for="Gmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              @*  <label asp-for="LinkAnh" class="control-label"></label>
+                <input asp-for="LinkAnh" class="form-control" />
+                <span asp-validation-for="LinkAnh" class="text-danger"></span>*@
+               <label asp-for="LinkAnh" class="control-label"></label>        
+               <input  type="file" id="imageFile" name="LinkAnh" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               @* <label asp-for="RoleId" class="control-label"></label>
+                <input asp-for="RoleId" class="form-control" />
+                <span asp-validation-for="RoleId" class="text-danger"></span>*@
+                <select class="form-control" name="RoleId" asp-for="RoleId">
+                        @foreach(var role in db.Roles.ToList())
+                        {
+                            <option value="@role.Id">@role.RoleName</option>
+                        }
+                </select>
+
+            </div>
+            <div class="form-group">
+               
+
+                <label asp-for="Status" class="control-label">Trạng Thái</label>
+               <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Status" id="Status1" value="0" checked >
+                    <label class="form-check-label" for="Status1">
+                        Online
+                    </label>
+               </div>
+               <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Status" id="Status2" value="1">
+                    <label class="form-check-label" for="Status2">
+                        Offline
+                    </label>
+               </div>
+            </div>
+            <div class="form-group" >
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    </div>
+
+</div>
+
+<div class="Back-form"> 
+    <a asp-area="" asp-controller="TaiKhoan" asp-action="ShowAllUser">Quay Về QL Acc</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
